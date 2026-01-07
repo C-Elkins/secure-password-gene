@@ -4,6 +4,12 @@ A cryptographically secure password generator built with React and TypeScript. G
 
 ![SecurePass Generator](https://img.shields.io/badge/security-cryptographic-brightgreen) ![React](https://img.shields.io/badge/react-19.2.0-blue) ![TypeScript](https://img.shields.io/badge/typescript-5.7.3-blue)
 
+## 📸 Screenshot
+
+![SecurePass Generator Interface](./screenshot.png)
+
+> A modern, dark-themed password generator with real-time strength analysis, customizable criteria, and secure hash generation.
+
 ## ✨ Features
 
 ### 🎯 Core Functionality
