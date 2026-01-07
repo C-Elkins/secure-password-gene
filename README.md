@@ -8,26 +8,16 @@ A cryptographically secure password generator built with React and TypeScript. G
 
 ## 📸 Demo
 
-### 🎬 Password Generation in Action
+A modern, dark-themed password generator featuring:
+- 🔄 Real-time password generation with instant strength feedback
+- 🎚️ Dynamic length adjustment from 8-128 characters
+- 🔤 Toggle character types (uppercase, lowercase, numbers, symbols)
+- 🎯 Quick preset selection (Basic, Standard, Maximum, PIN, Passphrase)
+- 📋 One-click copy to clipboard
+- 🔐 Automatic secure hash generation (SHA-256, SHA-512, PBKDF2)
+- ⚡ Smooth animations and instant visual feedback
 
-![SecurePass Generator Demo](./demo-preview.svg)
-
-> **Interactive Features Shown:**
-> - 🔄 Real-time password generation with instant strength feedback
-> - 🎚️ Dynamic length adjustment from 8-128 characters
-> - 🔤 Toggle character types (uppercase, lowercase, numbers, symbols)
-> - 🎯 Quick preset selection (Basic, Standard, Maximum, PIN, Passphrase)
-> - 📋 One-click copy to clipboard
-> - 🔐 Automatic secure hash generation (SHA-256, SHA-512, PBKDF2)
-> - ⚡ Smooth animations and instant visual feedback
-
-**Want to add a real demo GIF?** See [DEMO_RECORDING_GUIDE.md](./DEMO_RECORDING_GUIDE.md) for step-by-step instructions on recording and optimizing your own animated demo.
-
-### 📸 Interface Preview
-
-![SecurePass Generator Interface](./screenshot.png)
-
-> A modern, dark-themed password generator with real-time strength analysis, customizable criteria, and secure hash generation.
+Try it live to experience the full cryptographic password generation capabilities!
 
 ## ✨ Features
 
