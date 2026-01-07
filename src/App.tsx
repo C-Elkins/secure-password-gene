@@ -21,6 +21,7 @@ import { StrengthMeter } from '@/components/StrengthMeter'
 import { HashOutput } from '@/components/HashOutput'
 import { CharacterToggles } from '@/components/CharacterToggles'
 import { SymbolCustomizer } from '@/components/SymbolCustomizer'
+import { PresetSelector } from '@/components/PresetSelector'
 
 function App() {
   const [criteria, setCriteria] = useState<PasswordCriteria>({
@@ -82,6 +83,14 @@ function App() {
     toast.error('At least one character type must be selected')
   }
 
+  const handlePresetSelect = (presetCriteria: Partial<PasswordCriteria>) => {
+    setCriteria((current) => ({
+      ...current,
+      ...presetCriteria,
+    }))
+    toast.success('Preset applied successfully')
+  }
+
   const toggles = [
     {
       id: 'uppercase',
@@ -129,6 +138,19 @@ function App() {
         </div>
 
         <Card className="p-6 md:p-8 space-y-6">
+          <div className="flex items-center justify-between gap-3 flex-wrap">
+            <div>
+              <h2 className="text-sm font-semibold text-muted-foreground">Quick Setup</h2>
+              <p className="text-xs text-muted-foreground mt-0.5">Apply a preset or customize manually</p>
+            </div>
+            <PresetSelector 
+              onPresetSelect={handlePresetSelect}
+              currentCriteria={criteria}
+            />
+          </div>
+
+          <Separator />
+
           <div className="space-y-4">
             <div className="flex items-center justify-between">
               <Label className="text-base font-semibold">Generated Password</Label>

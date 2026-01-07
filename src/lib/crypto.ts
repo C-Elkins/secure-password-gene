@@ -7,10 +7,105 @@ export interface PasswordCriteria {
   customSymbols?: string
 }
 
+export interface PasswordPreset {
+  id: string
+  name: string
+  description: string
+  criteria: Partial<PasswordCriteria>
+}
+
 const UPPERCASE = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
 const LOWERCASE = 'abcdefghijklmnopqrstuvwxyz'
 const NUMBERS = '0123456789'
 export const DEFAULT_SYMBOLS = '!@#$%^&*()_+-=[]{}|;:,.<>?'
+
+export const SYMBOL_PRESETS = {
+  conservative: '!@#$%&*',
+  standard: '!@#$%^&*()_+-=[]{}|;:,.<>?',
+  maximum: '!@#$%^&*()_+-=[]{}|;:,.<>?/~`\'"\\ ',
+  alphanumeric: '',
+} as const
+
+export const PASSWORD_PRESETS: PasswordPreset[] = [
+  {
+    id: 'conservative',
+    name: 'Conservative',
+    description: 'Safe for most systems - basic symbols only',
+    criteria: {
+      length: 16,
+      includeUppercase: true,
+      includeLowercase: true,
+      includeNumbers: true,
+      includeSymbols: true,
+      customSymbols: SYMBOL_PRESETS.conservative,
+    },
+  },
+  {
+    id: 'standard',
+    name: 'Standard Security',
+    description: 'Balanced security - commonly accepted symbols',
+    criteria: {
+      length: 20,
+      includeUppercase: true,
+      includeLowercase: true,
+      includeNumbers: true,
+      includeSymbols: true,
+      customSymbols: SYMBOL_PRESETS.standard,
+    },
+  },
+  {
+    id: 'maximum',
+    name: 'Maximum Security',
+    description: 'Highest entropy - all printable symbols',
+    criteria: {
+      length: 24,
+      includeUppercase: true,
+      includeLowercase: true,
+      includeNumbers: true,
+      includeSymbols: true,
+      customSymbols: SYMBOL_PRESETS.maximum,
+    },
+  },
+  {
+    id: 'alphanumeric',
+    name: 'Alphanumeric Only',
+    description: 'No symbols - compatible with restrictive systems',
+    criteria: {
+      length: 24,
+      includeUppercase: true,
+      includeLowercase: true,
+      includeNumbers: true,
+      includeSymbols: false,
+      customSymbols: SYMBOL_PRESETS.alphanumeric,
+    },
+  },
+  {
+    id: 'pin',
+    name: 'PIN Code',
+    description: 'Numbers only - for PIN requirements',
+    criteria: {
+      length: 6,
+      includeUppercase: false,
+      includeLowercase: false,
+      includeNumbers: true,
+      includeSymbols: false,
+      customSymbols: SYMBOL_PRESETS.alphanumeric,
+    },
+  },
+  {
+    id: 'passphrase',
+    name: 'Long Passphrase',
+    description: 'Extended length for maximum security',
+    criteria: {
+      length: 32,
+      includeUppercase: true,
+      includeLowercase: true,
+      includeNumbers: true,
+      includeSymbols: true,
+      customSymbols: SYMBOL_PRESETS.standard,
+    },
+  },
+]
 
 export function generatePassword(criteria: PasswordCriteria): string {
   let charset = ''

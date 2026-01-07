@@ -41,11 +41,18 @@ This is a single-page tool with multiple interactive features (password generati
 - Success criteria: Clipboard API works reliably, toast confirms action, no visual glitches
 
 **Criteria Customization**
-- Functionality: Interactive controls for password length and character type inclusion (uppercase, lowercase, numbers, special symbols), with advanced customization for which specific symbols to include
-- Purpose: Allows users to meet specific password policy requirements or personal preferences, including restrictive policies that only allow certain special characters
-- Trigger: User interacts with slider or toggle switches, or clicks "Customize Symbols" button
-- Progression: User moves length slider → value updates in real-time → toggles character types on/off → clicks customize symbols button → modal opens with input field → enters desired symbols → applies changes → at least one type required → generate button creates new password meeting criteria
-- Success criteria: Controls are intuitive, validation prevents impossible states (all toggles off), symbol customization persists across generations, changes immediately affect generation
+- Functionality: Interactive controls for password length and character type inclusion (uppercase, lowercase, numbers, special symbols), with advanced customization for which specific symbols to include, plus quick-access presets for common password policies
+- Purpose: Allows users to meet specific password policy requirements or personal preferences, including restrictive policies that only allow certain special characters, or quickly apply common security standards
+- Trigger: User interacts with slider or toggle switches, clicks "Customize Symbols" button, or selects a preset from the "Load Preset" dialog
+- Progression: User clicks "Load Preset" → modal displays preset options (Conservative, Standard Security, Maximum Security, Alphanumeric Only, PIN Code, Long Passphrase) → user selects preset → criteria automatically configured → user can further customize → generate button creates new password meeting criteria
+- Success criteria: Presets apply immediately, controls are intuitive, validation prevents impossible states (all toggles off), symbol customization persists across generations, active preset is visually indicated, changes immediately affect generation
+
+**Preset System**
+- Functionality: Pre-configured password policies that set length, character types, and symbol sets for common use cases
+- Purpose: Streamlines password generation for users who need to meet specific compliance requirements or security standards
+- Trigger: User clicks "Load Preset" button
+- Progression: User clicks button → modal opens showing 6 preset options with descriptions → user reviews preset details (length, character types, symbol set) → clicks preset card → criteria applied → modal closes → toast confirms → password regenerates with new criteria
+- Success criteria: Presets cover common scenarios (conservative symbols for legacy systems, alphanumeric-only for restrictive policies, maximum security for high-risk accounts, PIN codes), active preset highlighted, instant application
 
 ## Edge Case Handling
 
@@ -54,6 +61,8 @@ This is a single-page tool with multiple interactive features (password generati
 - **Empty Symbol Set**: Prevent applying empty symbol customization; require at least one character in the custom symbol input field
 - **Customize Symbols When Disabled**: Disable the "Customize Symbols" button when the symbols toggle is off to prevent confusion
 - **Symbol Set Information**: Display the count of unique symbols in the custom set to help users understand entropy impact
+- **Preset Detection**: Highlight the currently active preset in the preset selector modal if criteria exactly match a preset configuration
+- **Manual Modifications After Preset**: Allow users to further customize after applying a preset without reverting their changes
 - **Clipboard API Unavailable**: Gracefully degrade to a fallback that selects text and shows instructions to manually copy (Ctrl+C / Cmd+C)
 - **Hash Computation Errors**: Wrap hash functions in try-catch blocks and display user-friendly error messages if crypto operations fail
 - **Empty Password State**: Show placeholder text and disable copy/hash functions until a password is generated
@@ -104,10 +113,10 @@ Animations should feel precise and purposeful, like mechanical components of a s
   - Slider: For password length control (Radix Slider) with custom styling showing tick marks at key intervals
   - Switch: For character type toggles (Radix Switch) with custom styling in accent color when active
   - Button: Primary generation button (Shadcn Button variant="default") and icon-only copy buttons (variant="ghost")
-  - Dialog: Modal for symbol customization (Radix Dialog) with input field for custom symbols and reset functionality
+  - Dialog: Modal for symbol customization and preset selection (Radix Dialog) with preset cards and input fields
   - Separator: Dividing sections visually (Radix Separator)
   - Tooltip: Educational hover information for entropy and hash types (Radix Tooltip)
-  - Toast: Copy confirmations and warnings (Sonner)
+  - Toast: Copy confirmations, preset application success, and warnings (Sonner)
   - Progress: Strength indicator bar (Radix Progress) with custom gradient fill based on entropy level
   
 - **Customizations**: 
@@ -115,6 +124,7 @@ Animations should feel precise and purposeful, like mechanical components of a s
   - Custom StrengthMeter component: combines progress bar with numerical entropy display and color-coded feedback
   - Custom HashOutput component: collapsible section with multiple read-only input fields and individual copy buttons
   - Custom SymbolCustomizer component: dialog-based interface for defining custom symbol sets with reset to defaults, unique symbol count display, and validation
+  - Custom PresetSelector component: dialog with clickable preset cards showing policy details (Conservative, Standard, Maximum, Alphanumeric, PIN, Passphrase), active preset highlighted with checkmark
   
 - **States**: 
   - Buttons: default (primary blue), hover (brighter blue + subtle lift), active (slightly darker + scale down), disabled (muted gray + reduced opacity)
