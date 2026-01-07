@@ -61,7 +61,18 @@ function App() {
   }
 
   useEffect(() => {
-    handleGenerate()
+    const generateInitial = async () => {
+      try {
+        const newPassword = generatePassword(criteria)
+        setPassword(newPassword)
+        
+        const newHashes = await hashPassword(newPassword)
+        setHashes(newHashes)
+      } catch (err) {
+        toast.error('Failed to generate password')
+      }
+    }
+    generateInitial()
   }, [])
 
   const handleAttemptDisableLast = () => {
