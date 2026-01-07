@@ -4,12 +4,13 @@ export interface PasswordCriteria {
   includeLowercase: boolean
   includeNumbers: boolean
   includeSymbols: boolean
+  customSymbols?: string
 }
 
 const UPPERCASE = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
 const LOWERCASE = 'abcdefghijklmnopqrstuvwxyz'
 const NUMBERS = '0123456789'
-const SYMBOLS = '!@#$%^&*()_+-=[]{}|;:,.<>?'
+export const DEFAULT_SYMBOLS = '!@#$%^&*()_+-=[]{}|;:,.<>?'
 
 export function generatePassword(criteria: PasswordCriteria): string {
   let charset = ''
@@ -28,8 +29,9 @@ export function generatePassword(criteria: PasswordCriteria): string {
     requiredChars.push(NUMBERS[getSecureRandomInt(NUMBERS.length)])
   }
   if (criteria.includeSymbols) {
-    charset += SYMBOLS
-    requiredChars.push(SYMBOLS[getSecureRandomInt(SYMBOLS.length)])
+    const symbolSet = criteria.customSymbols || DEFAULT_SYMBOLS
+    charset += symbolSet
+    requiredChars.push(symbolSet[getSecureRandomInt(symbolSet.length)])
   }
 
   if (charset.length === 0) {
@@ -67,7 +69,10 @@ export function calculateEntropy(criteria: PasswordCriteria): number {
   if (criteria.includeUppercase) charsetSize += 26
   if (criteria.includeLowercase) charsetSize += 26
   if (criteria.includeNumbers) charsetSize += 10
-  if (criteria.includeSymbols) charsetSize += SYMBOLS.length
+  if (criteria.includeSymbols) {
+    const symbolSet = criteria.customSymbols || DEFAULT_SYMBOLS
+    charsetSize += symbolSet.length
+  }
 
   if (charsetSize === 0) return 0
 

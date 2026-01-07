@@ -41,16 +41,19 @@ This is a single-page tool with multiple interactive features (password generati
 - Success criteria: Clipboard API works reliably, toast confirms action, no visual glitches
 
 **Criteria Customization**
-- Functionality: Interactive controls for password length and character type inclusion (uppercase, lowercase, numbers, special symbols)
-- Purpose: Allows users to meet specific password policy requirements or personal preferences
-- Trigger: User interacts with slider or toggle switches
-- Progression: User moves length slider → value updates in real-time → toggles character types on/off → at least one type required → generate button creates new password meeting criteria
-- Success criteria: Controls are intuitive, validation prevents impossible states (all toggles off), changes immediately affect generation
+- Functionality: Interactive controls for password length and character type inclusion (uppercase, lowercase, numbers, special symbols), with advanced customization for which specific symbols to include
+- Purpose: Allows users to meet specific password policy requirements or personal preferences, including restrictive policies that only allow certain special characters
+- Trigger: User interacts with slider or toggle switches, or clicks "Customize Symbols" button
+- Progression: User moves length slider → value updates in real-time → toggles character types on/off → clicks customize symbols button → modal opens with input field → enters desired symbols → applies changes → at least one type required → generate button creates new password meeting criteria
+- Success criteria: Controls are intuitive, validation prevents impossible states (all toggles off), symbol customization persists across generations, changes immediately affect generation
 
 ## Edge Case Handling
 
 - **All Character Types Disabled**: If user attempts to disable all character type toggles, prevent the last toggle from being turned off with a subtle shake animation and brief tooltip explaining at least one type is required
 - **Very Short Passwords**: Display a warning banner when length is set below 12 characters, explaining that short passwords are vulnerable to brute-force attacks
+- **Empty Symbol Set**: Prevent applying empty symbol customization; require at least one character in the custom symbol input field
+- **Customize Symbols When Disabled**: Disable the "Customize Symbols" button when the symbols toggle is off to prevent confusion
+- **Symbol Set Information**: Display the count of unique symbols in the custom set to help users understand entropy impact
 - **Clipboard API Unavailable**: Gracefully degrade to a fallback that selects text and shows instructions to manually copy (Ctrl+C / Cmd+C)
 - **Hash Computation Errors**: Wrap hash functions in try-catch blocks and display user-friendly error messages if crypto operations fail
 - **Empty Password State**: Show placeholder text and disable copy/hash functions until a password is generated
@@ -101,6 +104,7 @@ Animations should feel precise and purposeful, like mechanical components of a s
   - Slider: For password length control (Radix Slider) with custom styling showing tick marks at key intervals
   - Switch: For character type toggles (Radix Switch) with custom styling in accent color when active
   - Button: Primary generation button (Shadcn Button variant="default") and icon-only copy buttons (variant="ghost")
+  - Dialog: Modal for symbol customization (Radix Dialog) with input field for custom symbols and reset functionality
   - Separator: Dividing sections visually (Radix Separator)
   - Tooltip: Educational hover information for entropy and hash types (Radix Tooltip)
   - Toast: Copy confirmations and warnings (Sonner)
@@ -110,6 +114,7 @@ Animations should feel precise and purposeful, like mechanical components of a s
   - Custom PasswordDisplay component: monospace text with copy button, gradient background when populated
   - Custom StrengthMeter component: combines progress bar with numerical entropy display and color-coded feedback
   - Custom HashOutput component: collapsible section with multiple read-only input fields and individual copy buttons
+  - Custom SymbolCustomizer component: dialog-based interface for defining custom symbol sets with reset to defaults, unique symbol count display, and validation
   
 - **States**: 
   - Buttons: default (primary blue), hover (brighter blue + subtle lift), active (slightly darker + scale down), disabled (muted gray + reduced opacity)
@@ -122,8 +127,10 @@ Animations should feel precise and purposeful, like mechanical components of a s
   - Copy (squares/clipboard icon): Universal copy action
   - Check (checkmark): Confirmation of successful copy
   - Shuffle/Refresh: Regenerate password action
-  - Info (circle-i): Tooltip triggers for educational content
+  - Info (circle-i): Tooltip triggers for educational content and symbol set information
   - Eye/Shield: Password strength and security indicators
+  - Gear (settings icon): Symbol customization trigger
+  - Reset/Counter-clockwise arrow: Reset to default symbols
   
 - **Spacing**: 
   - Container padding: px-6 py-8 on cards

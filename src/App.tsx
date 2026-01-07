@@ -13,12 +13,14 @@ import {
   calculateEntropy,
   getStrengthLevel,
   hashPassword,
+  DEFAULT_SYMBOLS,
   type PasswordCriteria
 } from '@/lib/crypto'
 import { PasswordDisplay } from '@/components/PasswordDisplay'
 import { StrengthMeter } from '@/components/StrengthMeter'
 import { HashOutput } from '@/components/HashOutput'
 import { CharacterToggles } from '@/components/CharacterToggles'
+import { SymbolCustomizer } from '@/components/SymbolCustomizer'
 
 function App() {
   const [criteria, setCriteria] = useState<PasswordCriteria>({
@@ -26,7 +28,8 @@ function App() {
     includeUppercase: true,
     includeLowercase: true,
     includeNumbers: true,
-    includeSymbols: true
+    includeSymbols: true,
+    customSymbols: DEFAULT_SYMBOLS
   })
 
   const [password, setPassword] = useState('')
@@ -178,7 +181,16 @@ function App() {
           <Separator />
 
           <div className="space-y-4">
-            <Label className="text-sm font-semibold">Character Types</Label>
+            <div className="flex items-center justify-between">
+              <Label className="text-sm font-semibold">Character Types</Label>
+              <SymbolCustomizer
+                customSymbols={criteria.customSymbols || DEFAULT_SYMBOLS}
+                onSymbolsChange={(symbols) => {
+                  setCriteria({ ...criteria, customSymbols: symbols })
+                }}
+                disabled={!criteria.includeSymbols}
+              />
+            </div>
             <CharacterToggles
               toggles={toggles}
               canDisable={canDisableToggle}
