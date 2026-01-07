@@ -4,7 +4,26 @@ A cryptographically secure password generator built with React and TypeScript. G
 
 ![SecurePass Generator](https://img.shields.io/badge/security-cryptographic-brightgreen) ![React](https://img.shields.io/badge/react-19.2.0-blue) ![TypeScript](https://img.shields.io/badge/typescript-5.7.3-blue)
 
-## 📸 Screenshot
+> 💡 **Quick Start:** Jump to the [Demo](#-demo) section to see the password generator in action!
+
+## 📸 Demo
+
+### 🎬 Password Generation in Action
+
+![SecurePass Generator Demo](./demo-preview.svg)
+
+> **Interactive Features Shown:**
+> - 🔄 Real-time password generation with instant strength feedback
+> - 🎚️ Dynamic length adjustment from 8-128 characters
+> - 🔤 Toggle character types (uppercase, lowercase, numbers, symbols)
+> - 🎯 Quick preset selection (Basic, Standard, Maximum, PIN, Passphrase)
+> - 📋 One-click copy to clipboard
+> - 🔐 Automatic secure hash generation (SHA-256, SHA-512, PBKDF2)
+> - ⚡ Smooth animations and instant visual feedback
+
+**Want to add a real demo GIF?** See [DEMO_RECORDING_GUIDE.md](./DEMO_RECORDING_GUIDE.md) for step-by-step instructions on recording and optimizing your own animated demo.
+
+### 📸 Interface Preview
 
 ![SecurePass Generator Interface](./screenshot.png)
 

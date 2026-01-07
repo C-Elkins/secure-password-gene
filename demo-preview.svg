@@ -1,0 +1,136 @@
+<svg width="1280" height="800" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600;700&amp;family=JetBrains+Mono:wght@500&amp;display=swap');
+      
+      .bg { fill: #2d2f3a; }
+      .card-bg { fill: #383a47; }
+      .text-primary { fill: #ebeef5; font-family: 'Space Grotesk', sans-serif; }
+      .text-muted { fill: #999cab; font-family: 'Space Grotesk', sans-serif; }
+      .text-mono { fill: #ebeef5; font-family: 'JetBrains Mono', monospace; }
+      .accent { fill: #69c9cb; }
+      .accent-glow { fill: #69c9cb; filter: blur(8px); opacity: 0.3; }
+      .button { fill: #1b1d3f; stroke: #69c9cb; stroke-width: 2; }
+      .button-text { fill: #69c9cb; font-family: 'Space Grotesk', sans-serif; font-weight: 600; }
+      .slider-track { fill: #4d4f5c; }
+      .slider-fill { fill: #69c9cb; }
+      .slider-thumb { fill: #69c9cb; filter: drop-shadow(0 2px 8px rgba(105, 201, 203, 0.5)); }
+      .toggle-on { fill: #69c9cb; }
+      .toggle-off { fill: #4d4f5c; }
+      .strength-bar { fill: #69c9cb; }
+      .hash-text { fill: #69c9cb; font-family: 'JetBrains Mono', monospace; font-size: 11px; }
+      
+      @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+      @keyframes slideRight { from { x: 0; } to { x: 60; } }
+      @keyframes fillBar { from { width: 0; } to { width: 100%; } }
+      @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.6; } }
+      @keyframes buttonPress { 0%, 100% { transform: scale(1); } 50% { transform: scale(0.98); } }
+      
+      .animate-password { animation: fadeIn 0.5s ease-in 1s both; }
+      .animate-slider { animation: slideRight 1s ease-in-out 2s both; }
+      .animate-strength { animation: fillBar 0.8s ease-out 3.2s both; }
+      .animate-button { animation: buttonPress 0.3s ease-in-out 4.5s, pulse 0.5s ease-in-out 4.5s; }
+      .animate-hash { animation: fadeIn 0.5s ease-in 5.5s both; }
+      
+      .step-1 { animation: fadeIn 0.3s ease-in 0.5s both; }
+      .step-2 { animation: fadeIn 0.3s ease-in 1.5s both; }
+      .step-3 { animation: fadeIn 0.3s ease-in 2.5s both; }
+      .step-4 { animation: fadeIn 0.3s ease-in 3.5s both; }
+      .step-5 { animation: fadeIn 0.3s ease-in 4.5s both; }
+    </style>
+  </defs>
+  
+  <!-- Background -->
+  <rect class="bg" width="1280" height="800" rx="0"/>
+  
+  <!-- Main Card -->
+  <rect class="card-bg" x="240" y="80" width="800" height="640" rx="12"/>
+  
+  <!-- Header -->
+  <g class="step-1">
+    <circle class="accent-glow" cx="480" cy="130" r="20"/>
+    <circle class="accent" cx="480" cy="130" r="16"/>
+    <path class="accent" d="M475,125 h10 v-5 h-10 v-3 h-2 v14 h2 v-3 h10 v-3 z" transform="translate(0, -1)"/>
+    <text class="text-primary" x="505" y="138" font-size="28" font-weight="700">SecurePass Generator</text>
+    <text class="text-muted" x="475" y="165" font-size="13" text-anchor="middle">Generate cryptographically secure passwords locally</text>
+  </g>
+  
+  <!-- Password Display -->
+  <g class="step-2">
+    <text class="text-muted" x="280" y="210" font-size="13" font-weight="600">Generated Password</text>
+    <rect class="card-bg" x="280" y="220" width="720" height="50" rx="8" fill="#2d2f3a" stroke="#4d4f5c" stroke-width="1"/>
+    <text class="text-mono animate-password" x="300" y="250" font-size="18" font-weight="500">Kx9$mP#2vL@qR5nW</text>
+    <rect class="button" x="920" y="230" width="60" height="30" rx="6"/>
+    <text class="button-text" x="940" y="251" font-size="12" text-anchor="middle">Copy</text>
+  </g>
+  
+  <!-- Strength Meter -->
+  <g class="step-2">
+    <text class="text-muted" x="280" y="300" font-size="13" font-weight="600">Password Strength</text>
+    <rect class="slider-track" x="280" y="310" width="720" height="8" rx="4"/>
+    <rect class="strength-bar animate-strength" x="280" y="310" width="540" height="8" rx="4"/>
+    <text class="text-muted" x="280" y="335" font-size="11">Strong • 85.2 bits of entropy</text>
+  </g>
+  
+  <!-- Length Slider -->
+  <g class="step-3">
+    <text class="text-muted" x="280" y="375" font-size="13" font-weight="600">Password Length: 16</text>
+    <rect class="slider-track" x="280" y="390" width="720" height="6" rx="3"/>
+    <rect class="slider-fill" x="280" y="390" width="120" height="6" rx="3"/>
+    <circle class="slider-thumb animate-slider" cx="280" cy="393" r="10"/>
+    <text class="text-muted" x="280" y="415" font-size="10">8</text>
+    <text class="text-muted" x="990" y="415" font-size="10" text-anchor="end">128</text>
+  </g>
+  
+  <!-- Character Type Toggles -->
+  <g class="step-3">
+    <text class="text-muted" x="280" y="450" font-size="13" font-weight="600">Character Types</text>
+    
+    <!-- Toggle 1: Uppercase -->
+    <rect class="toggle-on" x="280" y="465" width="44" height="24" rx="12"/>
+    <circle class="toggle-on" cx="312" cy="477" r="10" fill="#fff"/>
+    <text class="text-muted" x="335" y="481" font-size="12">Uppercase (A-Z)</text>
+    
+    <!-- Toggle 2: Lowercase -->
+    <rect class="toggle-on" x="280" y="500" width="44" height="24" rx="12"/>
+    <circle class="toggle-on" cx="312" cy="512" r="10" fill="#fff"/>
+    <text class="text-muted" x="335" y="516" font-size="12">Lowercase (a-z)</text>
+    
+    <!-- Toggle 3: Numbers -->
+    <rect class="toggle-on" x="600" y="465" width="44" height="24" rx="12"/>
+    <circle class="toggle-on" cx="632" cy="477" r="10" fill="#fff"/>
+    <text class="text-muted" x="655" y="481" font-size="12">Numbers (0-9)</text>
+    
+    <!-- Toggle 4: Symbols -->
+    <rect class="toggle-on" x="600" y="500" width="44" height="24" rx="12"/>
+    <circle class="toggle-on" cx="632" cy="512" r="10" fill="#fff"/>
+    <text class="text-muted" x="655" y="516" font-size="12">Symbols (!@#$...)</text>
+  </g>
+  
+  <!-- Generate Button -->
+  <g class="step-4">
+    <rect class="button animate-button" x="280" y="555" width="720" height="48" rx="8"/>
+    <circle class="accent" cx="600" cy="579" r="8"/>
+    <path class="accent" d="M-3,-3 L3,0 L-3,3 L-1,0 Z" transform="translate(600, 579)"/>
+    <text class="button-text" x="640" y="584" font-size="15" text-anchor="middle">Generate New Password</text>
+  </g>
+  
+  <!-- Hash Output Preview -->
+  <g class="step-5 animate-hash">
+    <text class="text-muted" x="280" y="635" font-size="13" font-weight="600">Secure Hashes</text>
+    <text class="hash-text" x="280" y="655" opacity="0.7">SHA-256: 8f3b5c2a1...</text>
+    <text class="hash-text" x="280" y="675" opacity="0.7">SHA-512: 4d9e8a7f2...</text>
+    <text class="hash-text" x="280" y="695" opacity="0.7">PBKDF2: 2c7b6f1a8...</text>
+  </g>
+  
+  <!-- Decorative elements -->
+  <circle class="accent-glow" cx="1000" cy="150" r="40" opacity="0.1"/>
+  <circle class="accent-glow" cx="300" cy="600" r="60" opacity="0.08"/>
+  
+  <!-- Animation Loop Indicator -->
+  <g opacity="0.5">
+    <text class="text-muted" x="640" y="780" font-size="11" text-anchor="middle" opacity="0.6">
+      🎬 Recording a live demo GIF - See DEMO_RECORDING_GUIDE.md
+    </text>
+  </g>
+</svg>
